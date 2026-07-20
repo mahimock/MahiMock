@@ -1,5 +1,4 @@
-import { registerSW } from 'virtual:pwa-register';
-registerSW({ immediate: true });
+
 
 // Initialize theme
 const savedTheme = localStorage.getItem('theme');
