@@ -1,0 +1,5 @@
+{
+  "name": "MahiMock",
+  "description": "A premium EdTech platform for government exam preparation under the MahiMock brand, featuring comprehensive test series, study materials, and AI-powered question generation.",
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

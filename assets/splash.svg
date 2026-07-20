@@ -1,0 +1,25 @@
+<svg width="512" height="512" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M25 35L50 25L75 35L50 45L25 35Z" fill="#14B8A6" />
+  <path d="M35 40V48C35 48 40 52 50 52C60 52 65 48 65 48V40" fill="#0D9488" />
+  <path d="M25 35V45" stroke="#0D9488" strokeWidth="2" strokeLinecap="round" />
+  <path 
+    d="M20 80V55L40 70L55 55L75 80" 
+    stroke="url(#logo-gradient)" 
+    strokeWidth="12" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+  />
+  <path 
+    d="M60 65L75 80L90 55" 
+    stroke="#14B8A6" 
+    strokeWidth="12" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+  />
+  <defs>
+    <linearGradient id="logo-gradient" x1="20" y1="55" x2="75" y2="80" gradientUnits="userSpaceOnUse">
+      <stop stopColor="#14B8A6" />
+      <stop offset="1" stopColor="#1E40AF" />
+    </linearGradient>
+  </defs>
+</svg>

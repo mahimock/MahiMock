@@ -1,0 +1,76 @@
+const fs = require('fs');
+let code = fs.readFileSync('src/App.tsx', 'utf8');
+
+const imports = `import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from './contexts/AuthContext';
+import MainLayout from './layouts/MainLayout';
+import { HelmetProvider } from 'react-helmet-async';
+import { BrandingProvider } from './contexts/BrandingContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import CapacitorHardware from './components/CapacitorHardware';
+import InstallAppPrompt from './components/InstallAppPrompt';
+import { usePushNotifications } from './hooks/usePushNotifications';
+import { Capacitor } from '@capacitor/core';
+import Bootstrapper from './components/Bootstrapper';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { useEffect } from 'react';
+import AdminRoute from './components/AdminRoute';
+import AdminLayout from './layouts/AdminLayout';
+
+const Home = lazy(() => import('./pages/Home'));
+const AboutUs = lazy(() => import('./pages/AboutUs'));
+const Exams = lazy(() => import('./pages/Exams'));
+const MyProfile = lazy(() => import('./pages/MyProfile'));
+const Category = lazy(() => import('./pages/Category'));
+const ExamDetail = lazy(() => import('./pages/ExamDetail'));
+const Login = lazy(() => import('./pages/Login'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const AdminCategories = lazy(() => import('./pages/admin/AdminCategories'));
+const AdminStudyMaterials = lazy(() => import('./pages/admin/AdminStudyMaterials'));
+const AdminMockTests = lazy(() => import('./pages/admin/AdminMockTests'));
+const AdminUpdates = lazy(() => import('./pages/admin/AdminUpdates'));
+const AdminTestSeries = lazy(() => import('./pages/admin/AdminTestSeries'));
+const AdminSubjectSeries = lazy(() => import('./pages/admin/AdminSubjectSeries'));
+const AdminSectionSeries = lazy(() => import('./pages/admin/AdminSectionSeries'));
+const SubjectSeriesListing = lazy(() => import('./pages/SubjectSeriesListing'));
+const SubjectSeriesDetail = lazy(() => import('./pages/SubjectSeriesDetail'));
+const SectionSeriesListing = lazy(() => import('./pages/SectionSeriesListing'));
+const SectionSeriesDetail = lazy(() => import('./pages/SectionSeriesDetail'));
+const TestSeries = lazy(() => import('./pages/TestSeries'));
+const AdminQuestionBank = lazy(() => import('./pages/admin/AdminQuestionBank'));
+const AdminStudents = lazy(() => import('./pages/admin/AdminStudents'));
+const AdminResults = lazy(() => import('./pages/admin/AdminResults'));
+const AdminNotifications = lazy(() => import('./pages/admin/AdminNotifications'));
+const AdminSettings = lazy(() => import('./pages/admin/AdminSettings'));
+const AdminSearchManager = lazy(() => import('./pages/admin/AdminSearchManager'));
+const AdminStudentAttempts = lazy(() => import('./pages/admin/AdminStudentAttempts'));
+const AdminHomeManager = lazy(() => import('./pages/admin/AdminHomeManager'));
+const AdminFooterManager = lazy(() => import('./pages/admin/AdminFooterManager'));
+const CategoryTestSeries = lazy(() => import('./pages/CategoryTestSeries'));
+const ManageTestQuestions = lazy(() => import('./pages/admin/ManageTestQuestions'));
+const TestInstructions = lazy(() => import('./pages/TestInstructions'));
+const TakeTest = lazy(() => import('./pages/TakeTest'));
+const TestResult = lazy(() => import('./pages/TestResult'));
+const PerformanceHistory = lazy(() => import('./pages/PerformanceHistory'));
+const Leaderboard = lazy(() => import('./pages/Leaderboard'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const SavedItems = lazy(() => import('./pages/SavedItems'));
+const ReferralDashboard = lazy(() => import('./pages/ReferralDashboard'));
+const CertificateView = lazy(() => import('./pages/CertificateView'));
+const StudyMaterialsPage = lazy(() => import('./pages/StudyMaterialsPage'));
+const Updates = lazy(() => import('./pages/Updates'));
+const AIQuestionGenerator = lazy(() => import('./pages/admin/AIQuestionGenerator'));
+const AdminAnalytics = lazy(() => import('./pages/admin/AdminAnalytics'));
+`;
+
+// replace imports block
+code = code.replace(/import { BrowserRouter[\s\S]*?import { useEffect } from 'react';/, imports);
+
+code = code.replace('<Routes>', `<Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-white dark:bg-[#0B1020]"><div className="w-8 h-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div></div>}>\n        <Routes>`);
+code = code.replace('</Routes>', `</Routes>\n        </Suspense>`);
+
+fs.writeFileSync('src/App.tsx', code);

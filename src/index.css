@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-hindi: "Noto Sans Devanagari", sans-serif;
+}
+
+@layer components {
+  .premium-card {
+    transition: all 0.2s ease;
+    border: 1px solid #F1F5F9;
+    will-change: transform, border-color, background-color;
+    transform: translateZ(0);
+  }
+  .premium-card:hover {
+    border-color: #5B5FFB;
+    background-color: #F8FAFC;
+    transform: translateY(-2px) translateZ(0);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  html, body, #root {
+    background-color: #070B18 !important;
+    color: #ffffff;
+    color-scheme: dark;
+  }
+  .dark html, .dark body, .dark #root {
+    background-color: #070B18 !important;
+  }
+  body {
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+.no-touch-delay { touch-action: manipulation; }
+

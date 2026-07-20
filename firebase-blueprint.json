@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "ExamCategory": {
+      "title": "ExamCategory",
+      "description": "Represents a category of exams",
+      "type": "object",
+      "properties": {
+        "category": { "type": "string" },
+        "examName": { "type": "string" },
+        "slug": { "type": "string" },
+        "description": { "type": "string" },
+        "logo": { "type": "string" },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["category", "examName", "slug"]
+    },
+    "SubjectSeries": {
+      "title": "SubjectSeries",
+      "description": "A series of tests for a specific subject",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "iconName": { "type": "string" },
+        "themeColor": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "order": { "type": "number" }
+      }
+    },
+    "SectionSeries": {
+      "title": "SectionSeries",
+      "description": "A series of tests for a specific section",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "iconName": { "type": "string" },
+        "themeColor": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "order": { "type": "number" }
+      }
+    }
+  },
+  "firestore": {
+    "/exam_categories/{categoryId}": {
+      "schema": { "$ref": "#/entities/ExamCategory" },
+      "description": "Categories of exams"
+    },
+    "/subjectSeries/{seriesId}": {
+      "schema": { "$ref": "#/entities/SubjectSeries" },
+      "description": "Subject-wise test series"
+    },
+    "/sectionSeries/{seriesId}": {
+      "schema": { "$ref": "#/entities/SectionSeries" },
+      "description": "Sectional practice tests"
+    },
+    "/settings/branding": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "logoUrl": { "type": "string" },
+          "websiteName": { "type": "string" },
+          "faviconUrl": { "type": "string" }
+        }
+      },
+      "description": "Global website branding settings"
+    },
+    "/subjectTopics/{topicId}": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "subjectSeriesId": { "type": "string" },
+          "name": { "type": "string" },
+          "isActive": { "type": "boolean" },
+          "order": { "type": "number" }
+        }
+      },
+      "description": "Topics within a subject series"
+    }
+  }
+}

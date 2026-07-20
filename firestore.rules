@@ -1,0 +1,91 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId) || isAdmin();
+      
+      // User's private sub-collections
+      match /notifications/{docId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+      match /bookmarks/{docId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+      match /results/{docId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+        allow update, delete: if isAdmin();
+      }
+      match /attempts/{docId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+      }
+    }
+
+    // Public content (Exams, Categories, etc.)
+    match /categories/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /exams/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /test_series/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /subject_series/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /section_series/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /study_materials/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /updates/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // System configuration
+    match /system/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Analytics and Logs
+    match /analytics/{docId} {
+      allow read, write: if isAdmin();
+    }
+    match /audit_logs/{docId} {
+      allow create: if isSignedIn();
+      allow read, update, delete: if isAdmin();
+    }
+    
+    // Default deny
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
+
