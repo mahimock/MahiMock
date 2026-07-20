@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "232461116037",
+    "project_id": "vedyexa-f2fd6",
+    "storage_bucket": "vedyexa-f2fd6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232461116037:android:597d7be1a444ef6308bfec",
+        "android_client_info": {
+          "package_name": "com.mahimock.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232461116037-7m62oa1n9fjbllice6phnjh9m73u13kq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCorgqmVyxeX_8g3AlQRn2Mno8cP8tqFpU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232461116037-7m62oa1n9fjbllice6phnjh9m73u13kq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
